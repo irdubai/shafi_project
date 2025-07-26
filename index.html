@@ -6,7 +6,7 @@
     <title>سیستم حسابداری شافی - نسخه آنلاین</title>
     
     <!-- CSS Files -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="index.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- Meta Tags for SEO -->
@@ -225,17 +225,1114 @@
                 </div>
             </section>
 
-            <!-- کد HTML باقی بخش‌ها در پیام بعدی... -->
+            <!-- Customers Section -->
+            <section id="customers" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-users"></i> مدیریت مشتریان</h2>
+                    <div class="header-actions">
+                        <button class="btn btn-info" onclick="generateCustomerReport()">
+                            <i class="fas fa-chart-line"></i> گزارش صورتحساب
+                        </button>
+                        <button class="btn btn-primary" id="addCustomerBtn">
+                            <i class="fas fa-plus"></i> افزودن مشتری
+                        </button>
+                    </div>
+                </div>
 
+                <div class="filters-section">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="customerSearch" placeholder="جستجو:">
+                    </div>
+                    
+                    <select id="customerTypeFilter">
+                        <option value="">نوع مشتری:</option>
+                        <option value="">همه</option>
+                        <option value="retail">خرده فروشی</option>
+                        <option value="wholesale">عمده فروشی</option>
+                        <option value="supplier">تأمین کننده</option>
+                    </select>
+
+                    <select id="cityFilter">
+                        <option value="">شهر:</option>
+                        <option value="">همه</option>
+                    </select>
+
+                    <select id="balanceFilter">
+                        <option value="">وضعیت:</option>
+                        <option value="">همه</option>
+                        <option value="positive">بستانکار</option>
+                        <option value="negative">بدهکار</option>
+                        <option value="zero">صفر</option>
+                    </select>
+                </div>
+
+                <div class="table-container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>کد مشتری</th>
+                                <th>نام</th>
+                                <th>تلفن</th>
+                                <th>نوع</th>
+                                <th>موجودی</th>
+                                <th>وضعیت</th>
+                                <th>عملیات</th>
+                            </tr>
+                        </thead>
+                        <tbody id="customersTableBody">
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Products Section -->
+            <section id="products" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-box"></i> مدیریت کالاها</h2>
+                    <div class="header-actions">
+                        <button class="btn btn-info" onclick="generateStockReport()">
+                            <i class="fas fa-chart-line"></i> گزارش موجودی
+                        </button>
+                        <button class="btn btn-primary" id="addProductBtn">
+                            <i class="fas fa-plus"></i> افزودن کالا
+                        </button>
+                    </div>
+                </div>
+
+                <div class="filters-section">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="productSearch" placeholder="جستجو:">
+                    </div>
+                    
+                    <select id="categoryFilter">
+                        <option value="">دسته‌بندی:</option>
+                        <option value="">همه</option>
+                    </select>
+
+                    <select id="stockFilter">
+                        <option value="">وضعیت موجودی:</option>
+                        <option value="">همه</option>
+                        <option value="low">کم موجود</option>
+                        <option value="available">موجود</option>
+                        <option value="out">ناموجود</option>
+                    </select>
+                </div>
+
+                <div class="table-container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>کد کالا</th>
+                                <th>نام کالا</th>
+                                <th>دسته‌بندی</th>
+                                <th>واحد</th>
+                                <th>قیمت فروش</th>
+                                <th>قیمت خرید</th>
+                                <th>موجودی</th>
+                                <th>عملیات</th>
+                            </tr>
+                        </thead>
+                        <tbody id="productsTableBody">
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Invoices Section -->
+            <section id="invoices" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-file-invoice"></i> مدیریت فاکتورها</h2>
+                    <div class="header-actions">
+                        <button class="btn btn-info" onclick="generateInvoiceReport()">
+                            <i class="fas fa-chart-line"></i> گزارش فاکتورها
+                        </button>
+                        <button class="btn btn-primary" id="addInvoiceBtn">
+                            <i class="fas fa-plus"></i> فاکتور جدید
+                        </button>
+                    </div>
+                </div>
+
+                <div class="filters-section">
+                    <select id="invoiceTypeFilter">
+                        <option value="">نوع فاکتور:</option>
+                        <option value="">همه</option>
+                        <option value="sale">فروش</option>
+                        <option value="purchase">خرید</option>
+                        <option value="return_sale">مرجوعی فروش</option>
+                        <option value="return_purchase">مرجوعی خرید</option>
+                    </select>
+
+                    <input type="date" id="fromDateFilter" placeholder="از تاریخ:">
+                    <input type="date" id="toDateFilter" placeholder="تا تاریخ:">
+
+                    <select id="statusFilter">
+                        <option value="">وضعیت:</option>
+                        <option value="">همه</option>
+                        <option value="draft">پیش‌نویس</option>
+                        <option value="confirmed">تأیید شده</option>
+                        <option value="paid">پرداخت شده</option>
+                        <option value="cancelled">لغو شده</option>
+                    </select>
+                </div>
+
+                <div class="table-container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>شماره فاکتور</th>
+                                <th>تاریخ</th>
+                                <th>نوع</th>
+                                <th>مشتری</th>
+                                <th>مبلغ کل</th>
+                                <th>پرداخت شده</th>
+                                <th>مانده</th>
+                                <th>وضعیت</th>
+                                <th>عملیات</th>
+                            </tr>
+                        </thead>
+                        <tbody id="invoicesTableBody">
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Expenses Section -->
+            <section id="expenses" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-credit-card"></i> مدیریت هزینه‌ها</h2>
+                    <div class="header-actions">
+                        <button class="btn btn-primary" onclick="openExpenseModal()">
+                            <i class="fas fa-plus"></i> افزودن هزینه جدید
+                        </button>
+                        <button class="btn btn-info" onclick="generateExpenseReport()">
+                            <i class="fas fa-chart-line"></i> گزارش هزینه‌ها
+                        </button>
+                    </div>
+                </div>
+
+                <div class="filters-section">
+                    <input type="date" id="expenseFromDate" placeholder="از تاریخ:">
+                    <input type="date" id="expenseToDate" placeholder="تا تاریخ:">
+
+                    <select id="expenseCategoryFilter">
+                        <option value="">دسته‌بندی:</option>
+                        <option value="">همه</option>
+                        <option value="administrative">اداری</option>
+                        <option value="transportation">حمل و نقل</option>
+                        <option value="marketing">بازاریابی</option>
+                        <option value="services">خدمات</option>
+                        <option value="rent">اجاره</option>
+                        <option value="supplies">لوازم</option>
+                        <option value="other">سایر</option>
+                    </select>
+
+                    <select id="expensePaymentMethodFilter">
+                        <option value="">روش پرداخت:</option>
+                        <option value="">همه</option>
+                        <option value="cash">نقدی</option>
+                        <option value="bank">بانکی</option>
+                        <option value="card">کارتی</option>
+                        <option value="check">چک</option>
+                    </select>
+                </div>
+
+                <div class="sharing-section">
+                    <h4>اشتراک:</h4>
+                    <div class="sharing-buttons">
+                        <button class="btn btn-success" onclick="shareToWhatsApp()">
+                            <i class="fab fa-whatsapp"></i> واتساپ
+                        </button>
+                        <button class="btn btn-primary" onclick="shareToTelegram()">
+                            <i class="fab fa-telegram"></i> تلگرام
+                        </button>
+                        <button class="btn btn-secondary" onclick="copyToClipboard()">
+                            <i class="fas fa-copy"></i> کپی متن
+                        </button>
+                        <button class="btn btn-info" onclick="shareToRubika()">
+                            <i class="fas fa-share"></i> روبیکا
+                        </button>
+                        <button class="btn btn-warning" onclick="shareToEita()">
+                            <i class="fas fa-share"></i> ایتا
+                        </button>
+                        <button class="btn btn-primary" onclick="shareToBale()">
+                            <i class="fas fa-share"></i> بله
+                        </button>
+                        <button class="btn btn-success" onclick="shareToSMS()">
+                            <i class="fas fa-sms"></i> پیامک
+                        </button>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>تاریخ</th>
+                                <th>شرح</th>
+                                <th>مبلغ</th>
+                                <th>دسته‌بندی</th>
+                                <th>وضعیت</th>
+                                <th>عملیات</th>
+                            </tr>
+                        </thead>
+                        <tbody id="expensesTableBody">
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Reports Section -->
+            <section id="reports" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-chart-bar"></i> گزارش‌ها و تحلیل‌ها</h2>
+                    <div class="header-actions">
+                        <button class="btn btn-success" onclick="generateProfitLossReport()">
+                            <i class="fas fa-calculator"></i> گزارش سود و زیان
+                        </button>
+                        <button class="btn btn-primary" onclick="exportAllReports()">
+                            <i class="fas fa-download"></i> صادرات همه گزارش‌ها
+                        </button>
+                    </div>
+                </div>
+
+                <div class="filters-section">
+                    <input type="date" id="reportFromDate" placeholder="از تاریخ:">
+                    <input type="date" id="reportToDate" placeholder="تا تاریخ:">
+
+                    <select id="reportType">
+                        <option value="sales">نوع گزارش:</option>
+                        <option value="sales">فروش</option>
+                        <option value="purchases">خرید</option>
+                        <option value="expenses">هزینه‌ها</option>
+                        <option value="customers">مشتریان</option>
+                        <option value="products">کالاها</option>
+                        <option value="profit_loss">سود و زیان</option>
+                    </select>
+
+                    <select id="reportCustomer">
+                        <option value="">مشتری:</option>
+                        <option value="">همه مشتریان</option>
+                    </select>
+
+                    <select id="reportProduct">
+                        <option value="">محصول:</option>
+                        <option value="">همه محصولات</option>
+                    </select>
+
+                    <select id="reportCurrency">
+                        <option value="">ارز:</option>
+                        <option value="">همه ارزها</option>
+                        <option value="AED">درهم</option>
+                        <option value="IRR">ریال</option>
+                        <option value="USD">دلار</option>
+                        <option value="EUR">یورو</option>
+                        <option value="CNY">یوان</option>
+                    </select>
+
+                    <button class="btn btn-primary" onclick="generateReport()">
+                        <i class="fas fa-chart-bar"></i> تولید گزارش
+                    </button>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon bg-success">
+                            <i class="fas fa-arrow-up"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="totalSalesReport">0</h3>
+                            <p>کل فروش</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon bg-danger">
+                            <i class="fas fa-arrow-down"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="totalPurchasesReport">0</h3>
+                            <p>کل خرید</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon bg-warning">
+                            <i class="fas fa-credit-card"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="totalExpensesReport">0</h3>
+                            <p>کل هزینه‌ها</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon bg-info">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="netProfitReport">0</h3>
+                            <p>سود خالص</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Exchange Section -->
+            <section id="exchange" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-exchange-alt"></i> تبدیل ارز و مدیریت نرخ‌ها</h2>
+                </div>
+
+                <div class="dashboard-cards">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-calculator"></i> محاسبه تبدیل ارز</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>مبلغ:</label>
+                                    <input type="number" id="exchangeAmount" placeholder="مبلغ را وارد کنید">
+                                </div>
+                                <div class="form-group">
+                                    <label>از ارز:</label>
+                                    <select id="fromCurrency">
+                                        <option value="AED">درهم (AED)</option>
+                                        <option value="IRR">ریال (IRR)</option>
+                                        <option value="USD">دلار (USD)</option>
+                                        <option value="EUR">یورو (EUR)</option>
+                                        <option value="CNY">یوان (CNY)</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-primary" onclick="convertCurrency()">
+                                        <i class="fas fa-exchange-alt"></i> تبدیل
+                                    </button>
+                                </div>
+                                <div class="form-group">
+                                    <label>به ارز:</label>
+                                    <select id="toCurrency">
+                                        <option value="AED">درهم (AED)</option>
+                                        <option value="IRR">ریال (IRR)</option>
+                                        <option value="USD">دلار (USD)</option>
+                                        <option value="EUR">یورو (EUR)</option>
+                                        <option value="CNY">یوان (CNY)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="exchange-result">
+                                <label>نتیجه:</label>
+                                <div id="exchangeResult">--</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-cog"></i> مدیریت نرخ ارز</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>از ارز:</label>
+                                    <select id="rateFromCurrency">
+                                        <option value="AED">درهم (AED)</option>
+                                        <option value="IRR">ریال (IRR)</option>
+                                        <option value="USD">دلار (USD)</option>
+                                        <option value="EUR">یورو (EUR)</option>
+                                        <option value="CNY">یوان (CNY)</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>به ارز:</label>
+                                    <select id="rateToCurrency">
+                                        <option value="AED">درهم (AED)</option>
+                                        <option value="IRR">ریال (IRR)</option>
+                                        <option value="USD">دلار (USD)</option>
+                                        <option value="EUR">یورو (EUR)</option>
+                                        <option value="CNY">یوان (CNY)</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>نرخ تبدیل:</label>
+                                    <input type="number" id="exchangeRate" step="0.0001" placeholder="نرخ را وارد کنید">
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-success" onclick="saveExchangeRate()">
+                                        <i class="fas fa-save"></i> ذخیره نرخ ارز
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-list"></i> نرخ‌های فعلی ارز</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-container">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>از ارز</th>
+                                        <th>به ارز</th>
+                                        <th>نرخ</th>
+                                        <th>تاریخ به‌روزرسانی</th>
+                                        <th>عملیات</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="exchangeRatesTableBody">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Payments Section -->
+            <section id="payments" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-money-bill-wave"></i> مدیریت پرداخت‌ها</h2>
+                    <div class="header-actions">
+                        <button class="btn btn-primary" onclick="openPaymentModal()">
+                            <i class="fas fa-plus"></i> افزودن پرداخت جدید
+                        </button>
+                        <button class="btn btn-info" onclick="generatePaymentReport()">
+                            <i class="fas fa-chart-line"></i> گزارش پرداخت‌ها
+                        </button>
+                    </div>
+                </div>
+
+                <div class="filters-section">
+                    <input type="date" id="paymentFromDate" placeholder="از تاریخ:">
+                    <input type="date" id="paymentToDate" placeholder="تا تاریخ:">
+
+                    <select id="paymentTypeFilter">
+                        <option value="">نوع پرداخت:</option>
+                        <option value="">همه</option>
+                        <option value="cash">نقدی</option>
+                        <option value="bank">بانکی</option>
+                        <option value="card">کارتی</option>
+                        <option value="check">چک</option>
+                        <option value="credit">اعتباری</option>
+                    </select>
+
+                    <select id="paymentStatusFilter">
+                        <option value="">وضعیت:</option>
+                        <option value="">همه</option>
+                        <option value="confirmed">تأیید شده</option>
+                        <option value="pending">در انتظار</option>
+                        <option value="cancelled">لغو شده</option>
+                        <option value="returned">برگشت خورده</option>
+                    </select>
+                </div>
+
+                <div class="table-container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>تاریخ</th>
+                                <th>مشتری</th>
+                                <th>فاکتور</th>
+                                <th>مبلغ</th>
+                                <th>نوع پرداخت</th>
+                                <th>شماره مرجع</th>
+                                <th>وضعیت</th>
+                                <th>عملیات</th>
+                            </tr>
+                        </thead>
+                        <tbody id="paymentsTableBody">
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="dashboard-cards">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-chart-pie"></i> خلاصه پرداخت‌ها</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="stats-grid">
+                                <div class="stat-card">
+                                    <div class="stat-icon bg-success">
+                                        <i class="fas fa-money-bill"></i>
+                                    </div>
+                                    <div class="stat-info">
+                                        <h3 id="totalCashPayments">0</h3>
+                                        <p>کل پرداخت‌های نقدی</p>
+                                    </div>
+                                </div>
+
+                                <div class="stat-card">
+                                    <div class="stat-icon bg-primary">
+                                        <i class="fas fa-university"></i>
+                                    </div>
+                                    <div class="stat-info">
+                                        <h3 id="totalBankPayments">0</h3>
+                                        <p>کل پرداخت‌های بانکی</p>
+                                    </div>
+                                </div>
+
+                                <div class="stat-card">
+                                    <div class="stat-icon bg-info">
+                                        <i class="fas fa-credit-card"></i>
+                                    </div>
+                                    <div class="stat-info">
+                                        <h3 id="totalCardPayments">0</h3>
+                                        <p>کل پرداخت‌های کارتی</p>
+                                    </div>
+                                </div>
+
+                                <div class="stat-card">
+                                    <div class="stat-icon bg-warning">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                    <div class="stat-info">
+                                        <h3 id="totalPendingPayments">0</h3>
+                                        <p>پرداخت‌های در انتظار</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </main>
     </div>
 
-    <!-- JavaScript Files -->
-    <script src="js/api.js"></script>
-    <!-- سایر فایل‌های جاوااسکریپت اصلاح شده در پیام بعدی... -->
+    <!-- Customer Modal -->
+    <div id="customerModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="customerModalTitle">مشتری جدید</h2>
+                <span class="close" onclick="closeCustomerModal()">&times;</span>
+            </div>
+            <form id="customerForm">
+                <input type="hidden" name="customerId">
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>کد مشتری:</label>
+                        <input type="text" name="code" required>
+                    </div>
+                    <div class="form-group">
+                        <label>نام:</label>
+                        <input type="text" name="name" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>شرکت:</label>
+                        <input type="text" name="company">
+                    </div>
+                    <div class="form-group">
+                        <label>تلفن:</label>
+                        <input type="tel" name="phone">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>ایمیل:</label>
+                        <input type="email" name="email">
+                    </div>
+                    <div class="form-group">
+                        <label>شهر:</label>
+                        <input type="text" name="city">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>آدرس:</label>
+                    <textarea name="address" rows="2"></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>نوع موجودی:</label>
+                        <select name="balanceType">
+                            <option value="creditor">بستانکار</option>
+                            <option value="debtor">بدهکار</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>موجودی:</label>
+                        <input type="number" name="balance" value="0" step="0.01">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>واحد پولی:</label>
+                        <select name="currency">
+                            <option value="AED">درهم (AED)</option>
+                            <option value="IRR">ریال (IRR)</option>
+                            <option value="USD">دلار (USD)</option>
+                            <option value="EUR">یورو (EUR)</option>
+                            <option value="CNY">یوان (CNY)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>نوع مشتری:</label>
+                        <select name="customerType">
+                            <option value="retail">خرده فروشی</option>
+                            <option value="wholesale">عمده فروشی</option>
+                            <option value="supplier">تأمین کننده</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" name="isActive" checked> فعال
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label>یادداشت:</label>
+                    <textarea name="notes" rows="3"></textarea>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeCustomerModal()">انصراف</button>
+                    <button type="submit" class="btn btn-primary">ذخیره</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Product Modal -->
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="productModalTitle">کالای جدید</h2>
+                <span class="close" onclick="closeProductModal()">&times;</span>
+            </div>
+            <form id="productForm">
+                <input type="hidden" name="productId">
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>کد کالا:</label>
+                        <input type="text" name="code" required>
+                    </div>
+                    <div class="form-group">
+                        <label>نام کالا:</label>
+                        <input type="text" name="name" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>قیمت:</label>
+                        <input type="number" name="price" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label>واحد پولی:</label>
+                        <select name="currency">
+                            <option value="AED">درهم (AED)</option>
+                            <option value="IRR">ریال (IRR)</option>
+                            <option value="USD">دلار (USD)</option>
+                            <option value="EUR">یورو (EUR)</option>
+                            <option value="CNY">یوان (CNY)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>واحد:</label>
+                        <input type="text" name="unit" required>
+                    </div>
+                    <div class="form-group">
+                        <label>موجودی:</label>
+                        <input type="number" name="stock" value="0" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>دسته‌بندی:</label>
+                        <input type="text" name="category">
+                    </div>
+                    <div class="form-group">
+                        <label>حداقل موجودی:</label>
+                        <input type="number" name="minStock" value="0">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>محل نگهداری:</label>
+                    <input type="text" name="location">
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" name="isActive" checked> فعال
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label>توضیحات:</label>
+                    <textarea name="description" rows="3"></textarea>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeProductModal()">انصراف</button>
+                    <button type="submit" class="btn btn-primary">ذخیره</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Invoice Modal -->
+    <div id="invoiceModal" class="modal modal-large">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="invoiceModalTitle">فاکتور جدید</h2>
+                <span class="close" onclick="closeInvoiceModal()">&times;</span>
+            </div>
+            <form id="invoiceForm">
+                <input type="hidden" name="invoiceId">
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>شماره فاکتور:</label>
+                        <input type="text" name="invoiceNumber" required>
+                    </div>
+                    <div class="form-group">
+                        <label>تاریخ:</label>
+                        <input type="date" name="date" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>نوع فاکتور:</label>
+                        <select name="type" required>
+                            <option value="sale">فروش</option>
+                            <option value="purchase">خرید</option>
+                            <option value="return_sale">مرجوعی فروش</option>
+                            <option value="return_purchase">مرجوعی خرید</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>وضعیت:</label>
+                        <select name="status">
+                            <option value="draft">پیش‌نویس</option>
+                            <option value="confirmed">تأیید شده</option>
+                            <option value="paid">پرداخت شده</option>
+                            <option value="cancelled">لغو شده</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>مشتری:</label>
+                        <select name="customerId" required>
+                            <option value="">انتخاب مشتری</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>ارز فاکتور:</label>
+                        <select name="currency">
+                            <option value="AED">درهم (AED)</option>
+                            <option value="IRR">ریال (IRR)</option>
+                            <option value="USD">دلار (USD)</option>
+                            <option value="EUR">یورو (EUR)</option>
+                            <option value="CNY">یوان (CNY)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="invoice-items">
+                    <h3>آیتم‌های فاکتور:</h3>
+                    <div id="invoiceItemsContainer">
+                    </div>
+                    <button type="button" class="btn btn-secondary" onclick="addInvoiceItem()">
+                        <i class="fas fa-plus"></i> افزودن آیتم
+                    </button>
+                </div>
+
+                <div class="form-group">
+                    <label>توضیحات:</label>
+                    <textarea name="notes" rows="3"></textarea>
+                </div>
+
+                <div class="invoice-summary">
+                    <div class="summary-row">
+                        <label>جمع کل:</label>
+                        <span id="invoiceSubtotal">0</span>
+                    </div>
+                    <div class="summary-row">
+                        <label>تخفیف:</label>
+                        <input type="number" name="discount" value="0" step="0.01" onchange="calculateInvoiceTotal()">
+                        <span>AED</span>
+                    </div>
+                    <div class="summary-row">
+                        <label>مالیات:</label>
+                        <input type="number" name="tax" value="0" step="0.01" onchange="calculateInvoiceTotal()">
+                        <span>AED</span>
+                    </div>
+                    <div class="summary-row total">
+                        <label><strong>مبلغ نهایی:</strong></label>
+                        <span id="invoiceTotal"><strong>0 AED</strong></span>
+                    </div>
+                    <div class="summary-row">
+                        <label>پرداخت شده:</label>
+                        <input type="number" name="paidAmount" value="0" step="0.01" onchange="calculateInvoiceTotal()">
+                        <span>AED</span>
+                    </div>
+                    <div class="summary-row remaining">
+                        <label><strong>مانده:</strong></label>
+                        <span id="invoiceRemaining"><strong>0 AED</strong></span>
+                    </div>
+                </div>
+
+                <div class="invoice-actions">
+                    <button type="button" class="btn btn-info" onclick="previewInvoice()">
+                        <i class="fas fa-eye"></i> پیش نمایش
+                    </button>
+                    <button type="button" class="btn btn-secondary" onclick="printInvoice()">
+                        <i class="fas fa-print"></i> چاپ معمولی
+                    </button>
+                    <button type="button" class="btn btn-secondary" onclick="printThermalInvoice()">
+                        <i class="fas fa-receipt"></i> چاپ حرارتی
+                    </button>
+                    <button type="button" class="btn btn-danger" onclick="exportInvoiceToPDF()">
+                        <i class="fas fa-file-pdf"></i> PDF
+                    </button>
+                </div>
+
+                <div class="sharing-section">
+                    <h4>اشتراک‌گذاری</h4>
+                    <div class="sharing-buttons">
+                        <button type="button" class="btn btn-success" onclick="shareInvoiceToWhatsApp()">
+                            <i class="fab fa-whatsapp"></i> واتساپ
+                        </button>
+                        <button type="button" class="btn btn-primary" onclick="shareInvoiceToTelegram()">
+                            <i class="fab fa-telegram"></i> تلگرام
+                        </button>
+                        <button type="button" class="btn btn-info" onclick="shareInvoiceToRubika()">
+                            <i class="fas fa-share"></i> روبیکا
+                        </button>
+                        <button type="button" class="btn btn-warning" onclick="shareInvoiceToEita()">
+                            <i class="fas fa-share"></i> ایتا
+                        </button>
+                        <button type="button" class="btn btn-primary" onclick="shareInvoiceToBale()">
+                            <i class="fas fa-share"></i> بله
+                        </button>
+                        <button type="button" class="btn btn-success" onclick="shareInvoiceToSMS()">
+                            <i class="fas fa-sms"></i> پیامک
+                        </button>
+                        <button type="button" class="btn btn-secondary" onclick="copyInvoiceToClipboard()">
+                            <i class="fas fa-copy"></i> کپی متن
+                        </button>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeInvoiceModal()">انصراف</button>
+                    <button type="submit" class="btn btn-primary">ذخیره</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Invoice Preview Modal -->
+    <div id="invoicePreviewModal" class="modal modal-large">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>پیش نمایش فاکتور</h2>
+                <span class="close" onclick="closeInvoicePreviewModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div id="invoicePreviewContent"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeInvoicePreviewModal()">بستن پیش نمایش</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Expense Modal -->
+    <div id="expenseModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="expenseModalTitle">هزینه جدید</h2>
+                <span class="close" onclick="closeExpenseModal()">&times;</span>
+            </div>
+            <form id="expenseForm">
+                <input type="hidden" name="expenseId">
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>تاریخ:</label>
+                        <input type="date" name="date" required>
+                    </div>
+                    <div class="form-group">
+                        <label>شرح:</label>
+                        <input type="text" name="description" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>مبلغ:</label>
+                        <input type="number" name="amount" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label>واحد پولی:</label>
+                        <select name="currency">
+                            <option value="AED">درهم (AED)</option>
+                            <option value="IRR">ریال (IRR)</option>
+                            <option value="USD">دلار (USD)</option>
+                            <option value="EUR">یورو (EUR)</option>
+                            <option value="CNY">یوان (CNY)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>دسته‌بندی:</label>
+                        <select name="category" required>
+                            <option value="administrative">اداری</option>
+                            <option value="transportation">حمل و نقل</option>
+                            <option value="marketing">بازاریابی</option>
+                            <option value="services">خدمات</option>
+                            <option value="rent">اجاره</option>
+                            <option value="supplies">لوازم</option>
+                            <option value="other">سایر</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>روش پرداخت:</label>
+                        <select name="paymentMethod" required>
+                            <option value="cash">نقدی</option>
+                            <option value="bank">بانکی</option>
+                            <option value="card">کارتی</option>
+                            <option value="check">چک</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>یادداشت:</label>
+                    <textarea name="notes" rows="3"></textarea>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeExpenseModal()">انصراف</button>
+                    <button type="submit" class="btn btn-primary">ذخیره</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="paymentModalTitle">پرداخت جدید</h2>
+                <span class="close" onclick="closePaymentModal()">&times;</span>
+            </div>
+            <form id="paymentForm">
+                <input type="hidden" name="paymentId">
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>تاریخ:</label>
+                        <input type="date" name="date" required>
+                    </div>
+                    <div class="form-group">
+                        <label>مشتری:</label>
+                        <select name="customerId" required>
+                            <option value="">انتخاب مشتری</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>فاکتور مرتبط:</label>
+                    <select name="invoiceId">
+                        <option value="">انتخاب فاکتور (اختیاری)</option>
+                    </select>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>مبلغ:</label>
+                        <input type="number" name="amount" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label>واحد پولی:</label>
+                        <select name="currency">
+                            <option value="AED">درهم (AED)</option>
+                            <option value="IRR">ریال (IRR)</option>
+                            <option value="USD">دلار (USD)</option>
+                            <option value="EUR">یورو (EUR)</option>
+                            <option value="CNY">یوان (CNY)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>نوع پرداخت:</label>
+                        <select name="paymentType" required>
+                            <option value="cash">نقدی</option>
+                            <option value="bank">بانکی</option>
+                            <option value="card">کارتی</option>
+                            <option value="check">چک</option>
+                            <option value="credit">اعتباری</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>شماره مرجع:</label>
+                        <input type="text" name="referenceNumber">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>وضعیت:</label>
+                    <select name="status">
+                        <option value="confirmed">تأیید شده</option>
+                        <option value="pending">در انتظار</option>
+                        <option value="cancelled">لغو شده</option>
+                        <option value="returned">برگشت خورده</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>توضیحات:</label>
+                    <textarea name="description" rows="3"></textarea>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closePaymentModal()">انصراف</button>
+                    <button type="submit" class="btn btn-primary">ذخیره</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <!-- Notification Container -->
     <div id="notifications" class="notifications-container"></div>
+
+    <!-- JavaScript Files - اصلاح شده -->
+    <script src="js/common.js"></script>
+    <script src="js/Product Management.js"></script>
+    <script src="js/Customer Management.js"></script>
+    <script src="js/Invoice Management.js"></script>
+    <script src="js/Accounting Module.js"></script>
+    <script src="js/Reports & Dashboard.js"></script>
 
     <!-- Service Worker Registration -->
     <script>
@@ -247,5 +1344,7 @@
             });
         }
     </script>
+
+    <!-- برنامه‌نویس: موسی بعاجی -->
 </body>
 </html>
