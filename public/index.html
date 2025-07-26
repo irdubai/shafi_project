@@ -1,1 +1,251 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سیستم حسابداری شافی - نسخه آنلاین</title>
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Meta Tags for SEO -->
+    <meta name="description" content="سیستم حسابداری شافی - مدیریت کامل حسابداری آنلاین">
+    <meta name="keywords" content="حسابداری، فاکتور، مشتری، کالا، آنلاین">
+    <meta name="author" content="موسی بعاجی">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <!-- PWA Support -->
+    <meta name="theme-color" content="#2c3e50">
+    <link rel="manifest" href="/manifest.json">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading" id="loadingScreen">
+        <div class="loading-spinner"></div>
+        <p>در حال بارگذاری سیستم حسابداری شافی...</p>
+        <small>لطفاً کمی صبر کنید</small>
+    </div>
 
+    <!-- Login Section -->
+    <div class="login-page" id="loginSection" style="display: none;">
+        <div class="login-container">
+            <div class="login-header">
+                <div class="online-status">
+                    <i class="fas fa-circle"></i>
+                    <span>آنلاین</span>
+                </div>
+                <h1><i class="fas fa-store"></i> سیستم حسابداری شافی</h1>
+                <p>نسخه آنلاین - پلتفرم ابری</p>
+            </div>
+
+            <form class="login-form" id="loginForm">
+                <div class="login-info">
+                    <p><strong>اطلاعات ورود پیش‌فرض:</strong></p>
+                    <p>نام کاربری: <code>admin</code></p>
+                    <p>رمز عبور: <code>123456</code></p>
+                    <small>پس از ورود می‌توانید اطلاعات خود را تغییر دهید</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="username">نام کاربری:</label>
+                    <input type="text" id="username" name="username" required 
+                           placeholder="نام کاربری خود را وارد کنید" value="admin">
+                </div>
+
+                <div class="form-group">
+                    <label for="password">رمز عبور:</label>
+                    <input type="password" id="password" name="password" required 
+                           placeholder="رمز عبور خود را وارد کنید" value="123456">
+                </div>
+
+                <div id="loginError" class="error-message" style="display: none;"></div>
+
+                <button type="submit" class="login-button">
+                    <i class="fas fa-sign-in-alt"></i>
+                    ورود
+                </button>
+            </form>
+
+            <div class="login-footer">
+                <p>برنامه‌نویس: <strong>موسی بعاجی</strong></p>
+                <p>نسخه 2.0 - پلتفرم ابری</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Application -->
+    <div class="main-app" id="mainApp" style="display: none;">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-content">
+                <div class="header-right">
+                    <button class="menu-toggle" id="menuToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1 class="app-title">
+                        <i class="fas fa-calculator"></i>
+                        سیستم حسابداری شافی
+                    </h1>
+                    <span class="version-badge">آنلاین v2.0</span>
+                </div>
+                
+                <div class="header-left">
+                    <div class="online-indicator">
+                        <i class="fas fa-wifi"></i>
+                        <span>متصل</span>
+                    </div>
+                    <div class="user-info">
+                        <i class="fas fa-user-circle"></i>
+                        <span id="userName">مدیر سیستم</span>
+                        <button class="logout-btn" onclick="logout()">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h3>منوی اصلی</h3>
+                <p>مدیریت کامل حسابداری</p>
+                <small>برنامه‌نویس: موسی بعاجی</small>
+            </div>
+
+            <ul class="nav-menu">
+                <li><a href="#" class="nav-link active" data-section="dashboard">
+                    <i class="fas fa-tachometer-alt"></i> داشبورد
+                </a></li>
+                <li><a href="#" class="nav-link" data-section="customers">
+                    <i class="fas fa-users"></i> مشتریان
+                </a></li>
+                <li><a href="#" class="nav-link" data-section="products">
+                    <i class="fas fa-box"></i> کالاها
+                </a></li>
+                <li><a href="#" class="nav-link" data-section="invoices">
+                    <i class="fas fa-file-invoice"></i> فاکتورها
+                </a></li>
+                <li><a href="#" class="nav-link" data-section="expenses">
+                    <i class="fas fa-credit-card"></i> هزینه‌ها
+                </a></li>
+                <li><a href="#" class="nav-link" data-section="reports">
+                    <i class="fas fa-chart-bar"></i> گزارش‌ها
+                </a></li>
+                <li><a href="#" class="nav-link" data-section="exchange">
+                    <i class="fas fa-exchange-alt"></i> تبدیل ارز
+                </a></li>
+                <li><a href="#" class="nav-link" data-section="payments">
+                    <i class="fas fa-money-bill-wave"></i> مدیریت پرداخت‌ها
+                </a></li>
+                <li><a href="#" class="nav-link" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i> خروج
+                </a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="content-section active">
+                <div class="section-header">
+                    <h2><i class="fas fa-tachometer-alt"></i> داشبورد</h2>
+                    <button class="btn btn-primary" onclick="refreshDashboard()">
+                        <i class="fas fa-sync-alt"></i> به‌روزرسانی
+                    </button>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon bg-primary">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="totalCustomers">0</h3>
+                            <p>تعداد مشتریان</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon bg-success">
+                            <i class="fas fa-box"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="totalProducts">0</h3>
+                            <p>تعداد کالاها</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon bg-info">
+                            <i class="fas fa-file-invoice"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="totalInvoices">0</h3>
+                            <p>تعداد فاکتورها</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon bg-warning">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="totalSales">0</h3>
+                            <p>کل فروش</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-cards">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-exclamation-triangle"></i> کالاهای کم موجود</h3>
+                        </div>
+                        <div class="card-body">
+                            <div id="lowStockProducts" class="table-container">
+                                <p class="empty-state">در حال بارگذاری...</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-clock"></i> فاکتورهای اخیر</h3>
+                        </div>
+                        <div class="card-body">
+                            <div id="recentInvoices" class="table-container">
+                                <p class="empty-state">در حال بارگذاری...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- کد HTML باقی بخش‌ها در پیام بعدی... -->
+
+        </main>
+    </div>
+
+    <!-- JavaScript Files -->
+    <script src="js/api.js"></script>
+    <!-- سایر فایل‌های جاوااسکریپت اصلاح شده در پیام بعدی... -->
+
+    <!-- Notification Container -->
+    <div id="notifications" class="notifications-container"></div>
+
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => console.log('SW registered'))
+                    .catch(registrationError => console.log('SW registration failed'));
+            });
+        }
+    </script>
+</body>
+</html>
