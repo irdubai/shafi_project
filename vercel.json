@@ -1,13 +1,20 @@
 {
   "version": 2,
-  "name": "shafi-accounting-pro",
   "builds": [
     {
-      "src": "public/**/*",
+      "src": "*.html",
       "use": "@vercel/static"
     },
     {
-      "src": "api/**/*.js",
+      "src": "*.css", 
+      "use": "@vercel/static"
+    },
+    {
+      "src": "js/*.js",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "api/*.js",
       "use": "@vercel/node"
     }
   ],
@@ -18,12 +25,7 @@
     },
     {
       "src": "/(.*)",
-      "dest": "/public/$1"
+      "dest": "/$1"
     }
-  ],
-  "functions": {
-    "api/**/*.js": {
-      "maxDuration": 10
-    }
-  }
+  ]
 }
