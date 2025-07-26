@@ -1,0 +1,64 @@
+{
+  "version": 2,
+  "name": "shafi-accounting-pro",
+  "builds": [
+    {
+      "src": "public/**/*",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "api/**/*.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/init",
+      "dest": "/api/init.js"
+    },
+    {
+      "src": "/api/customers/(.*)",
+      "dest": "/api/customers.js"
+    },
+    {
+      "src": "/api/products/(.*)",
+      "dest": "/api/products.js"
+    },
+    {
+      "src": "/api/invoices/(.*)",
+      "dest": "/api/invoices.js"
+    },
+    {
+      "src": "/api/expenses/(.*)",
+      "dest": "/api/expenses.js"
+    },
+    {
+      "src": "/api/payments/(.*)",
+      "dest": "/api/payments.js"
+    },
+    {
+      "src": "/api/reports/(.*)",
+      "dest": "/api/reports.js"
+    },
+    {
+      "src": "/api/accounting/(.*)",
+      "dest": "/api/accounting.js"
+    },
+    {
+      "src": "/api/exchange/(.*)",
+      "dest": "/api/exchange.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/public/$1"
+    }
+  ],
+  "functions": {
+    "api/**/*.js": {
+      "maxDuration": 15
+    }
+  },
+  "env": {
+    "NODE_ENV": "production"
+  }
+}

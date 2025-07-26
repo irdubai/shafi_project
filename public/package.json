@@ -1,0 +1,34 @@
+{
+  "name": "shafi-accounting-pro",
+  "version": "2.0.0",
+  "description": "سیستم حسابداری شافی - نسخه پیشرفته آنلاین",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "echo 'Build complete - Static files ready'",
+    "start": "vercel dev",
+    "deploy": "vercel --prod"
+  },
+  "dependencies": {
+    "@planetscale/database": "^1.11.0",
+    "mysql2": "^3.6.0"
+  },
+  "devDependencies": {
+    "vercel": "^32.0.0"
+  },
+  "keywords": [
+    "accounting",
+    "persian",
+    "business",
+    "invoice",
+    "فارسی",
+    "حسابداری",
+    "فاکتور"
+  ],
+  "author": "موسی بعاجی",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/username/shafi-accounting-pro"
+  }
+}
