@@ -1,2 +1,2 @@
-# shafi_project
-نرم افزار حسابداری شافی
+# shafi-accounting-vercel
+پخش قطعات موبایل شافی
