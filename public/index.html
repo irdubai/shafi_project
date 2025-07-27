@@ -4116,19 +4116,6 @@
                 </html>
             `);
 
-                <head>
-                <!-- سایر متاتگ‌ها -->
-                <link rel="manifest" href="/manifest.json">
-                <link rel="icon" href="/favicon.ico">
-    
-                <!-- PWA meta tags -->
-                <meta name="theme-color" content="#764ba2">
-                <meta name="apple-mobile-web-app-capable" content="yes">
-                <meta name="apple-mobile-web-app-status-bar-style" content="default">
-                <meta name="apple-mobile-web-app-title" content="شافی">
-                <link rel="apple-touch-icon" href="/icons/icon-192x192.png">
-            </head>
-
             printWindow.document.close();
             printWindow.print();
         }
@@ -5241,7 +5228,7 @@
         function generateReport() {
             const dateFrom = document.getElementById('reportDateFrom')?.value;
             const dateTo = document.getElementById('reportDateTo')?.value;
-            const reportType = document.getElementById('reportType')?.value;
+            const reportType = document.get-ElementById('reportType')?.value;
             const customerId = document.getElementById('reportCustomer')?.value;
             const productId = document.getElementById('reportProduct')?.value;
             const currency = document.getElementById('reportCurrency')?.value;
